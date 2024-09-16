@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="background-color: black; color: white;">
+<div id="divOne" style="width: 100px;margin: 1px;">&nbsp;</div>
+<div id="divTwo" style="width: 100px;margin: 1px;">&nbsp;</div>
+<div id="divThree" style="width: 100px;margin: 1px;">&nbsp;</div>
+
+<button id="colorBtn" onclick="colorUs()">Color</button>
+
+<script>
+    let divs = document.querySelectorAll("div")
+    divs.forEach(div => div.style.backgroundColor = "magenta")
+    // for (div in divs) {
+    //     divs[div].style.backgroundColor = "red"
+    // }
+    function colorUs() {
+        let divOne = document.getElementById("divOne");
+        let divTwo = document.getElementById("divTwo");
+        let divThree = document.getElementById("divThree");
+        divOne.style.backgroundColor = "red";
+        divTwo.style.backgroundColor = "green";
+        divThree.style.backgroundColor = "blue";
+    }
+</script>
+
+</body>
+</html>

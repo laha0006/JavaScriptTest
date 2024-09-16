@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-size: xx-large;
+    }
+    input {
+      background-color: #1f1f1f;
+      color: yellow;
+      font-size: xx-large;
+    }
+    button {
+      background-color: #2f2f2f;
+      color: white;
+      font-size: xx-large;
+    }
+    #container {
+      max-width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <form>
+    <label>
+      <input id="userId" type="text">
+    </label>
+    <button type="button" id="getUser" onclick="getUserString(event)">Get User</button>
+    <button type="button" id="getAllUsersBtn" onclick="getAllUsers(event)">Get All</button>
+  </form>
+  <div id="showUser">
+  </div>
+</div>
+<script src="./day3.js"></script>
+</body>
+</html>

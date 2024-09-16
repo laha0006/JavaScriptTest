@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .my-div {
+            width: 25px;
+            height: 25px;
+            background-color: red;
+            margin: 1px;
+        }
+    </style>
+    <script src="theScript.mjs"></script>
+</head>
+<body>
+<div id="divOne" class="my-div" onclick="clickedDiv(this)"></div>
+<div id="divTwo" class="my-div" onclick="clickedDiv(this)"></div>
+<p id="OUTPUT" style="font-size: 20px"></p>
+<div id="outer" onclick="outer(e)">
+    <div id="divNumber2" class="my-div"></div>
+    <div id="divNumber3" class="my-div"></div>
+    <div id="divNumber4" class="my-div"></div>
+    <div id="divNumber5" class="my-div"></div>
+    <div id="divNumber6" class="my-div"></div>
+    <div id="divNumber7" class="my-div"></div>
+    <div id="divNumber8" class="my-div"></div>
+    <div id="divNumber9" class="my-div"></div>
+    <div id="divNumber10" class="my-div"></div>
+    <div id="divNumber11" class="my-div"></div>
+</div>
+
+<div id="listHolder" class=""></div>
+
+<form>
+    <input id="newName" name="newName" type="text">
+    <button type="submit" onclick="addName(event)"> add name</button>
+    <button type="submit" onclick="removeFirst(event)">remove first</button>
+    <button type="submit" onclick="removeLast(event)">remove last</button>
+</form>
+
+<table class="table" style="text-align: center">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Year</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+</table>
+<form>
+    <label for="price"></label>
+    <input id="price">
+    <button type="submit" onclick="filterPrice(event)"> Price Less Than</button>
+    <button type="submit" onclick="renderDefaultTable(event)">Restore</button>
+</form>
+
+<script>
+    const cars = [
+        {id: 1, year: 1997, make: 'Ford', model: 'E350', price: 3000},
+        {id: 2, year: 1999, make: 'Chevy', model: 'Venture', price: 4900},
+        {id: 3, year: 2000, make: 'Chevy', model: 'Venture', price: 5000},
+        {id: 4, year: 1996, make: 'Jeep', model: 'Grand Cherokee', price: 4799},
+        {id: 5, year: 2005, make: 'Volvo', model: 'V70', price: 44799}
+    ];
+    const tableBody = document.getElementById("tbody")
+    tableBody.appendChild(createTrs(cars))
+    console.log(add(1, 2));
+
+    function mapCarToTr(car) {
+        // Create a new table row element
+        const tr = document.createElement('tr');
+
+        // Iterate over the keys of the car object to create table cells
+        Object.keys(car).forEach(col => {
+            const td = document.createElement('td');
+            td.textContent = car[col]; // Set the text content of each cell
+            tr.appendChild(td); // Append each cell to the row
+        });
+
+        return tr; // Return the complete row
+    }
+
+    function createTrs(cars) {
+        // Create a DocumentFragment to minimize reflows
+        const fragment = document.createDocumentFragment();
+
+        // Map each car object to a table row and append it to the fragment
+        cars.forEach(car => {
+            const tr = mapCarToTr(car);
+            fragment.appendChild(tr);
+        });
+
+        return fragment; // Return the complete fragment with all rows
+    }
+
+    function renderDefaultTable(e) {
+        e.preventDefault()
+        const tableBody = document.getElementById("tbody")
+        tableBody.innerHTML = "";
+        tableBody.appendChild(createTrs(cars))
+    }
+
+    function filterPrice(e) {
+        e.preventDefault()
+        const price = document.getElementById("price").value
+        const tableBody = document.getElementById("tbody")
+        filteredCars = cars.filter(car => car.price < price)
+        tableBody.innerHTML = "";
+        tableBody.appendChild(createTrs(filteredCars))
+    }
+
+    function clickedDiv(elem) {
+        console.log(elem.id)
+    }
+
+    function outer(event) {
+        const target = event.target
+        const output = document.getElementById("OUTPUT")
+        console.log(target.id)
+        console.log(target.id)
+        output.innerText = "Hello from" + target.id
+    }
+
+    const names = ["Lars", "Victor", "Jeppe", "Magnus", "Peter"]
+
+    function createUl(items) {
+        return `<ul id="ul1">${names.map(name => `<li> ${name}</li>`).join("")}</ul>`
+    }
+
+    const listHolder = document.getElementById("listHolder")
+    listHolder.innerHTML = createUl(names)
+
+    function addName(e) {
+        e.preventDefault()
+        const ul = document.getElementById("ul1")
+        let newName = document.getElementById("newName").value
+        const liElem = document.createElement("li")
+        liElem.appendChild(document.createTextNode(newName))
+        ul.appendChild(liElem)
+        // names.sort((a,b) => {
+        //     if (a > b) {
+        //         return 1
+        //     }
+        //     if (b > a) {
+        //         return -1
+        //     }
+        //     return 0
+        // })
+        // listHolder.innerHTML = createUl(names)
+    }
+
+    function removeFirst(e) {
+        e.preventDefault()
+        names.shift()
+        listHolder.innerHTML = createUl(names)
+    }
+
+    function removeLast(e) {
+        e.preventDefault()
+        names.pop()
+        listHolder.innerHTML = createUl(names)
+    }
+</script>
+</body>
+</html>

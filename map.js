@@ -1,17 +1,21 @@
 const base_url = "https://countries.plaul.dk/api/countries/"
 const defaultFill = "#2f2f2f"
+const selectColor = "#092ee3"
 let lastTarget;
+let highlightedTarget;
 
 function deHighlightLastCountry() {
+    highlightedTarget = "";
     if(lastTarget !== undefined) {
         lastTarget.style.fill = defaultFill;
     }
 }
 
 function highlightCountry(target) {
+    highlightedTarget = target;
     console.log("COLOR");
     console.log(target.style.fill)
-    target.style.fill = "#092ee3"
+    target.style.fill = selectColor
 }
 
 async function fetchCountryData(id) {
@@ -59,3 +63,19 @@ async function mapClick(e) {
 let map = document.getElementById("svg2");
 
 map.addEventListener("click", mapClick);
+
+map.addEventListener("mouseover", (e) => {
+    let target = e.target
+    if (target === highlightedTarget) {
+        return
+    }
+    target.style.fill ="#79ea07"
+})
+
+map.addEventListener("mouseout", (e) => {
+    let target = e.target
+    if (target === highlightedTarget) {
+        return
+    }
+    target.style.fill = defaultFill
+})

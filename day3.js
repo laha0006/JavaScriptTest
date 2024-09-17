@@ -55,6 +55,7 @@ async function fetchUser(userId) {
 }
 
 function displayUser(user) {
+    console.log("inside display user!")
     let userElem = document.getElementById("showUser");
     let userText = `
         Name: ${user.name} <br>
@@ -75,5 +76,20 @@ async function getUserString(e) {
     let userId = getUserId();
     let user = await fetchUser(userId);
     displayUser(user);
+    console.log("after await")
     getButton.disabled = false;
+}
+
+function checkRes(res) {
+    if (res.ok) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+async function getUserLol() {
+    let res = await fetch(baseUrl);
+    let json = await res.json();
+    console.log(json)
 }

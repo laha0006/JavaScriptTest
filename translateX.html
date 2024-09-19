@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    .container {
+      position:relative;
+      width: 100%;
+      margin: auto;
+      padding: 15px;
+      background-color: #2f2f2f;
+      overflow: hidden;
+    }
+    .slider {
+      display: flex;
+      width: 60%;
+      margin: auto;
+      background-color: yellow;
+    }
+    .slide {
+      flex: 1 0 100%;
+    }
+
+    .slide img {
+      display: block;
+      width: 100%;
+      float: right;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="slider">
+    <div class="slide"><img src="https://via.placeholder.com/800x350/0000ff?text=image1" alt="image1"></div>
+    <div class="slide"><img src="https://via.placeholder.com/800x350/ff0000?text=image2" alt="image2"></div>
+    <div class="slide"><img src="https://via.placeholder.com/800x350/00ff00?text=image3" alt="image3"></div>
+  </div>
+</div>
+
+<button id="magicBtn" type="button">Magic</button>
+
+<script>
+  const magic = document.getElementById("magicBtn");
+  const slider = document.querySelector(".slider");
+  let per = 10
+  magic.addEventListener("click", () => {
+    slider.style.transform = `translateX(-${per}%)`
+    per += 10;
+  })
+</script>
+</body>
+</html>
